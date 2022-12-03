@@ -15,7 +15,7 @@ module.exports = {
   ServerError,
   ERR_NOT_FOUND: (error, options) =>
     makeError(error, options, {
-      status: 400,
+      status: 404,
       code: "ERR_NOT_FOUND",
     }),
 };
