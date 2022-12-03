@@ -17,6 +17,16 @@ async function getContractById(profileId, contractId) {
   return contract;
 }
 
+async function getContracts(profileId) {
+  return await Contract.findAll({
+    where: {
+      status: { [Op.not]: "terminated" },
+      [Op.or]: [{ ContractorId: profileId }, { ClientId: profileId }],
+    },
+  });
+}
+
 module.exports = {
   getContractById,
+  getContracts,
 };
