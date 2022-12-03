@@ -1,9 +1,14 @@
+const { getContractById } = require("../../controllers/contracts");
+
 module.exports = async (req, res, next) => {
+  const {
+    params: { id: contractId },
+    profile: { id: profileId },
+  } = req;
+
   try {
-    const { Contract } = req.app.get("models");
-    const { id } = req.params;
-    const contract = await Contract.findOne({ where: { id } });
-    if (!contract) return res.status(404).end();
+    const contract = await getContractById(profileId, contractId);
+
     return res.json(contract);
   } catch (error) {
     return next(error);
