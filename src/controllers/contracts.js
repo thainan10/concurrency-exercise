@@ -1,6 +1,6 @@
 const { Op } = require("sequelize");
 const { Contract } = require("../model");
-const { ServerError } = require("../utils/errors");
+const { ERR_NOT_FOUND } = require("../utils/errors");
 
 async function getContractById(profileId, contractId) {
   const contract = await Contract.findOne({
@@ -11,10 +11,7 @@ async function getContractById(profileId, contractId) {
   });
 
   if (!contract) {
-    throw new ServerError("Contract not found", {
-      status: 404,
-      code: "ERR_NOT_FOUND",
-    });
+    throw ERR_NOT_FOUND("Contract not found");
   }
 
   return contract;

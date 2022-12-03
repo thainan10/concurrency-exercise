@@ -7,4 +7,15 @@ class ServerError extends Error {
   }
 }
 
-module.exports = { ServerError };
+function makeError(error, options, defaultOptions) {
+  return new ServerError(error, options || defaultOptions);
+}
+
+module.exports = {
+  ServerError,
+  ERR_NOT_FOUND: (error, options) =>
+    makeError(error, options, {
+      status: 400,
+      code: "ERR_NOT_FOUND",
+    }),
+};
