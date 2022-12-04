@@ -63,7 +63,7 @@ Below is a list of the required API's for the application.
 
 6. **_GET_** `/admin/best-profession?start=<date>&end=<date>` - Returns the profession that earned the most money (sum of jobs paid) for any contactor that worked in the query time range.
 
-7. **_GET_** `/admin/best-clients?start=<date>&end=<date>&limit=<integer>` - returns the clients the paid the most for jobs in the query time period. limit query parameter should be applied, default limit is 2.
+7. **_GET_** `/admin/best-clients?start=<date>&end=<date>&limit=<integer>` - Returns the clients that paid the most for jobs in the query time period. The limit query parameter should be applied, default limit is 2.
 
 ```
  [
@@ -96,3 +96,15 @@ It would be great for example if you'd write some unit test / simple frontend de
 When you have finished the assignment, create a github repository and send us the link.
 
 Thank you and good luck! 🙏
+
+## Possible improvements
+
+- Parameters validations (e.g.: https://joi.dev/api/?v=17.7.0);
+- Tests. At least:
+  - Routes;
+  - Concurrency (especially for the payment and deposit endpoints);
+  - Performance (ideal);
+  - Stress (ideal).
+- Type checks (TS);
+- ESLint and Prettier;
+- JSDocs (optionally, as adding types and tests should already document the code good enough).
