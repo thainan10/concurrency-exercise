@@ -5,7 +5,6 @@ const {
   ERR_DEPOSIT_OVER_LIMITED,
 } = require("../utils/errors");
 
-// Deposits money into the the the balance of a client, a client can't deposit more than 25% his total of jobs to pay. (at the deposit moment)
 async function deposit(clientId, amount) {
   if (!amount || typeof amount !== "number" || amount <= 0) {
     throw ERR_INVALID_DEPOSIT_AMOUNT(`Invalid deposit amount`);
