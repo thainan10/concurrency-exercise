@@ -38,4 +38,14 @@ module.exports = {
       status: 400,
       code: "ERR_NOT_ENOUGH_FUNDS",
     }),
+  ERR_INVALID_DEPOSIT_AMOUNT: (error, options) =>
+    makeError(error, options, {
+      status: 400,
+      code: "ERR_INVALID_DEPOSIT_AMOUNT",
+    }),
+  ERR_DEPOSIT_OVER_LIMITED: (error, options) =>
+    makeError(error, options, {
+      status: 400,
+      code: "ERR_DEPOSIT_OVER_LIMITED",
+    }),
 };
