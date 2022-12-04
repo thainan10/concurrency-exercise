@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Contract } = require("../model");
+const { Contract, CONTRACT_STATUS } = require("../model");
 const { ERR_NOT_FOUND } = require("../utils/errors");
 
 async function getContractById(profileId, contractId) {
@@ -20,7 +20,7 @@ async function getContractById(profileId, contractId) {
 async function getContracts(profileId) {
   return await Contract.findAll({
     where: {
-      status: { [Op.not]: "terminated" },
+      status: { [Op.not]: CONTRACT_STATUS.terminated },
       [Op.or]: [{ ContractorId: profileId }, { ClientId: profileId }],
     },
   });

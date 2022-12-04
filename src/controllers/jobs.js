@@ -1,5 +1,12 @@
 const { Op } = require("sequelize");
-const { sequelize, Job, Contract, Profile, PROFILE_TYPE } = require("../model");
+const {
+  sequelize,
+  Job,
+  Contract,
+  Profile,
+  PROFILE_TYPE,
+  CONTRACT_STATUS,
+} = require("../model");
 const {
   ERR_INVALID_PROFILE,
   ERR_NOT_FOUND,
@@ -17,7 +24,7 @@ async function getUnpaidJobs(profileId) {
       model: Contract,
       required: true,
       where: {
-        status: "in_progress",
+        status: CONTRACT_STATUS.in_progress,
         [Op.or]: [{ ContractorId: profileId }, { ClientId: profileId }],
       },
       attributes: [],
