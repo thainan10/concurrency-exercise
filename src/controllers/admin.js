@@ -1,8 +1,13 @@
 const { Op } = require("sequelize");
 const { sequelize, Profile, Contract, Job } = require("../model");
+const { ERR_INVALID_DATE } = require("../utils/errors");
 
 // Returns the profession that earned the most money (sum of jobs paid) for any contactor that worked in the query time range.
 async function getBestProfessionInRange(startDate, endDate) {
+  if (isNaN(Date.parse(startDate)) || isNaN(Date.parse(endDate))) {
+    throw ERR_INVALID_DATE("Date invalid");
+  }
+
   const datesRange = [new Date(startDate), new Date(endDate)];
 
   const result = await Profile.findOne({

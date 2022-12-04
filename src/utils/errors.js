@@ -48,4 +48,9 @@ module.exports = {
       status: 400,
       code: "ERR_DEPOSIT_OVER_LIMITED",
     }),
+  ERR_INVALID_DATE: (error, options) =>
+    makeError(error, options, {
+      status: 400,
+      code: "ERR_INVALID_DATE",
+    }),
 };
