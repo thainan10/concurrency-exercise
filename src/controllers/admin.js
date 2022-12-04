@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const { sequelize, Profile, Contract, Job } = require("../model");
+const { ERR_INVALID_PARAMETER } = require("../utils/errors");
 
 async function getBestProfessionInRange(dateRange) {
   const result = await Profile.findOne({
@@ -32,6 +33,10 @@ async function getBestProfessionInRange(dateRange) {
 }
 
 async function getBestClientsInRange(dateRange, limit = 2) {
+  if (isNaN(+limit)) {
+    throw ERR_INVALID_PARAMETER("Parameter limit has invalid type");
+  }
+
   const clients = await Profile.findAll({
     where: { type: "client" },
     attributes: [

@@ -53,4 +53,9 @@ module.exports = {
       status: 400,
       code: "ERR_INVALID_DATE",
     }),
+  ERR_INVALID_PARAMETER: (error, options) =>
+    makeError(error, options, {
+      status: 400,
+      code: "ERR_INVALID_PARAMETER",
+    }),
 };
