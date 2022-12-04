@@ -47,11 +47,13 @@ async function getBestClientsInRange(startDate, endDate, limit = 2) {
 
   const clients = await Profile.findAll({
     where: { type: "client" },
-    attributes: {
-      include: [[sequelize.fn("SUM", sequelize.col("price")), "totalPayment"]],
-    },
+    attributes: [
+      "id",
+      [sequelize.literal(`firstName || ' ' || lastName`), "fullName"],
+      [sequelize.fn("SUM", sequelize.col("price")), "paid"],
+    ],
     group: ["profile.id"],
-    order: [["totalPayment", "DESC"]],
+    order: [["paid", "DESC"]],
     subQuery: false,
     limit,
     include: {
