@@ -9,11 +9,12 @@ const { getBestClientsInRange } = require("../../controllers/admin");
  */
 module.exports = async (req, res, next) => {
   const {
-    query: { start, end, limit },
+    query: { limit },
+    dateRange,
   } = req;
 
   try {
-    const clients = await getBestClientsInRange(start, end, limit);
+    const clients = await getBestClientsInRange(dateRange, limit);
 
     return res.json(clients);
   } catch (error) {

@@ -1,14 +1,7 @@
 const { Op } = require("sequelize");
 const { sequelize, Profile, Contract, Job } = require("../model");
-const { ERR_INVALID_DATE } = require("../utils/errors");
 
-async function getBestProfessionInRange(startDate, endDate) {
-  if (isNaN(Date.parse(startDate)) || isNaN(Date.parse(endDate))) {
-    throw ERR_INVALID_DATE("Date invalid");
-  }
-
-  const datesRange = [new Date(startDate), new Date(endDate)];
-
+async function getBestProfessionInRange(dateRange) {
   const result = await Profile.findOne({
     where: { type: "contractor" },
     attributes: [
@@ -28,7 +21,7 @@ async function getBestProfessionInRange(startDate, endDate) {
         model: Job,
         where: {
           paid: true,
-          paymentDate: { [Op.between]: datesRange },
+          paymentDate: { [Op.between]: dateRange },
         },
         attributes: [],
       },
@@ -38,13 +31,7 @@ async function getBestProfessionInRange(startDate, endDate) {
   return result && result.profession;
 }
 
-async function getBestClientsInRange(startDate, endDate, limit = 2) {
-  if (isNaN(Date.parse(startDate)) || isNaN(Date.parse(endDate))) {
-    throw ERR_INVALID_DATE("Date invalid");
-  }
-
-  const datesRange = [new Date(startDate), new Date(endDate)];
-
+async function getBestClientsInRange(dateRange, limit = 2) {
   const clients = await Profile.findAll({
     where: { type: "client" },
     attributes: [
@@ -65,7 +52,7 @@ async function getBestClientsInRange(startDate, endDate, limit = 2) {
         model: Job,
         where: {
           paid: true,
-          paymentDate: { [Op.between]: datesRange },
+          paymentDate: { [Op.between]: dateRange },
         },
         attributes: [],
       },

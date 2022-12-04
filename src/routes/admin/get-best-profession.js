@@ -8,12 +8,10 @@ const { getBestProfessionInRange } = require("../../controllers/admin");
  * @returns profession
  */
 module.exports = async (req, res, next) => {
-  const {
-    query: { start, end },
-  } = req;
+  const { dateRange } = req;
 
   try {
-    const profession = await getBestProfessionInRange(start, end);
+    const profession = await getBestProfessionInRange(dateRange);
 
     return res.json(profession);
   } catch (error) {
