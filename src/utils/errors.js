@@ -18,4 +18,24 @@ module.exports = {
       status: 404,
       code: "ERR_NOT_FOUND",
     }),
+  ERR_INVALID_PROFILE: (error, options) =>
+    makeError(error, options, {
+      status: 400,
+      code: "ERR_INVALID_PROFILE",
+    }),
+  ERR_FORBIDDEN: (error, options) =>
+    makeError(error, options, {
+      status: 403,
+      code: "ERR_FORBIDDEN",
+    }),
+  ERR_JOB_ALREADY_PAID: (error, options) =>
+    makeError(error, options, {
+      status: 403,
+      code: "ERR_JOB_ALREADY_PAID",
+    }),
+  ERR_NOT_ENOUGH_FUNDS: (error, options) =>
+    makeError(error, options, {
+      status: 400,
+      code: "ERR_NOT_ENOUGH_FUNDS",
+    }),
 };
