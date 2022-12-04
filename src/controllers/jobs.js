@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { sequelize, Job, Contract, Profile } = require("../model");
+const { sequelize, Job, Contract, Profile, PROFILE_TYPE } = require("../model");
 const {
   ERR_INVALID_PROFILE,
   ERR_NOT_FOUND,
@@ -29,7 +29,7 @@ async function getUnpaidJobs(profileId) {
 
 async function payJob(profile, jobId) {
   // Another option is to remove the middleware from the route and get only the profile ID in the header, checking details in the transaction
-  if (profile.type !== "client") {
+  if (profile.type !== PROFILE_TYPE.client) {
     throw ERR_INVALID_PROFILE(`This operation is permitted only for clients`);
   }
 
@@ -42,7 +42,7 @@ async function payJob(profile, jobId) {
       lock: true,
     });
 
-    if (client.type !== "client") {
+    if (client.type !== PROFILE_TYPE.client) {
       throw ERR_FORBIDDEN(`Contractors are not allowed to pay for jobs`);
     }
 
@@ -85,7 +85,7 @@ async function payJob(profile, jobId) {
       throw ERR_NOT_FOUND(`Contractor not found`);
     }
 
-    if (contractor.type !== "contractor") {
+    if (contractor.type !== PROFILE_TYPE.contractor) {
       throw ERR_FORBIDDEN(`Clients are not allowed to receive job payments`);
     }
 

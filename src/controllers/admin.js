@@ -1,10 +1,10 @@
 const { Op } = require("sequelize");
-const { sequelize, Profile, Contract, Job } = require("../model");
+const { sequelize, Profile, Contract, Job, PROFILE_TYPE } = require("../model");
 const { ERR_INVALID_PARAMETER } = require("../utils/errors");
 
 async function getBestProfessionInRange(dateRange) {
   const result = await Profile.findOne({
-    where: { type: "contractor" },
+    where: { type: PROFILE_TYPE.contractor },
     attributes: [
       "profession",
       [sequelize.fn("SUM", sequelize.col("price")), "totalPayment"],
@@ -38,7 +38,7 @@ async function getBestClientsInRange(dateRange, limit = 2) {
   }
 
   const clients = await Profile.findAll({
-    where: { type: "client" },
+    where: { type: PROFILE_TYPE.client },
     attributes: [
       "id",
       [sequelize.literal(`firstName || ' ' || lastName`), "fullName"],

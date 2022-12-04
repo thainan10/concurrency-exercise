@@ -107,4 +107,7 @@ Thank you and good luck! 🙏
   - Stress (ideal).
 - Type checks (TS);
 - ESLint and Prettier;
-- JSDocs (optionally, as adding types and tests should already document the code good enough).
+- JSDocs (optionally, as adding types and tests should already document the code good enough);
+- Add quality items to run on every commit:
+  - Codeship/GH Actions to run tests, lint, etc.;
+  - Sonar quality gates.
