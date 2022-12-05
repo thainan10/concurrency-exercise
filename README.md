@@ -103,7 +103,7 @@ Thank you and good luck! 🙏
 - Tests. At least:
   - Routes;
   - Concurrency (especially for the payment and deposit endpoints);
-  - Performance (ideal);
+  - Performance (ideal. E.g.: https://k6.io/);
   - Stress (ideal).
 - Type checks (TS);
 - ESLint and Prettier;
